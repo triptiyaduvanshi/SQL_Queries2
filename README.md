@@ -21,6 +21,7 @@ INSERT INTO travel_history (date, start_city, end_city, traveler) VALUES ('2024-
  ('2024-04-10', 'Rome', 'Berlin', 'Neha'), ('2024-05-01', 'Chennai', 'Dubai', 'Arjun'), 
  ('2024-05-03', 'Dubai', 'Amsterdam', 'Arjun'), ('2024-05-06', 'Amsterdam', 'Chennai', 'Arjun'); 
 <br>
+<br>
   with base as (select *,row_number()over(partition by traveler order by date) ranks from travel_history),
  base2 as(select traveler, end_city as endcity from base where ranks=(select max(ranks) from base)
  group by traveler, end_city),
